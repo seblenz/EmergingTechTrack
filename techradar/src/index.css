@@ -1,0 +1,460 @@
+/* ── TechRadar Global Styles ─────────────────────────────
+   Dark, institutional aesthetic. Bloomberg Terminal meets UN report.
+   IBM Plex Sans for body text, IBM Plex Mono for data labels.
+   ──────────────────────────────────────────────────────── */
+
+:root {
+  /* Background layers (darkest to lightest) */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-card: #1a2035;
+  --bg-card-hover: #1f2847;
+  --bg-surface: #243052;
+
+  /* Text hierarchy */
+  --text-primary: #e8ecf4;
+  --text-secondary: #8892a8;
+  --text-muted: #5a6478;
+  --text-accent: #a0b4d0;
+
+  /* Signal band colors — used consistently everywhere */
+  --signal-academic: #22d3ee;
+  --signal-builder: #4ade80;
+  --signal-capital: #fbbf24;
+  --signal-discourse: #e879f9;
+
+  /* Semantic colors */
+  --accent-positive: #4ade80;
+  --accent-negative: #f87171;
+  --accent-neutral: #8892a8;
+  --accent-brand: #6366f1;
+
+  /* Domain tag colors */
+  --domain-ai: #818cf8;
+  --domain-quantum: #22d3ee;
+  --domain-biotech: #4ade80;
+  --domain-neurotech: #e879f9;
+  --domain-space: #fb923c;
+  --domain-climate: #34d399;
+  --domain-digital: #60a5fa;
+  --domain-robotics: #f472b6;
+
+  /* Phase colors */
+  --phase-1: #22d3ee;
+  --phase-2: #fbbf24;
+  --phase-3: #f87171;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Subtle scan-line overlay for the radio-wave aesthetic */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+a {
+  color: var(--signal-academic);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Scrollbar Styling ─────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── App Layout ────────────────────────────────────────── */
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header / Navigation ───────────────────────────────── */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.app-logo-icon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+/* Animated radar pulse icon */
+.app-logo-icon::before,
+.app-logo-icon::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--signal-academic);
+}
+
+.app-logo-icon::before {
+  width: 16px;
+  height: 16px;
+  top: 8px;
+  left: 8px;
+  opacity: 0.8;
+  animation: radar-pulse 2s ease-out infinite;
+}
+
+.app-logo-icon::after {
+  width: 8px;
+  height: 8px;
+  top: 12px;
+  left: 12px;
+  background: var(--signal-academic);
+  opacity: 1;
+}
+
+@keyframes radar-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.app-logo-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.app-logo-subtitle {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.app-nav a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.app-nav a:hover,
+.app-nav a.active {
+  color: var(--text-primary);
+  background: var(--bg-card);
+  text-decoration: none;
+}
+
+/* ── Main Content ──────────────────────────────────────── */
+
+.app-main {
+  flex: 1;
+  padding: var(--space-xl);
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Page Header ───────────────────────────────────────── */
+
+.page-header {
+  margin-bottom: var(--space-xl);
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-default);
+}
+
+.card-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.card-section-title {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+}
+
+/* ── Domain Tags ───────────────────────────────────────── */
+
+.domain-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.domain-tag[data-domain="AI"] { background: rgba(129, 140, 248, 0.15); color: var(--domain-ai); }
+.domain-tag[data-domain="Quantum"] { background: rgba(34, 211, 238, 0.15); color: var(--domain-quantum); }
+.domain-tag[data-domain="Biotech"] { background: rgba(74, 222, 128, 0.15); color: var(--domain-biotech); }
+.domain-tag[data-domain="Neurotech"] { background: rgba(232, 121, 249, 0.15); color: var(--domain-neurotech); }
+.domain-tag[data-domain="Space"] { background: rgba(251, 146, 60, 0.15); color: var(--domain-space); }
+.domain-tag[data-domain="Climate Tech"] { background: rgba(52, 211, 153, 0.15); color: var(--domain-climate); }
+.domain-tag[data-domain="Digital Infrastructure"] { background: rgba(96, 165, 250, 0.15); color: var(--domain-digital); }
+.domain-tag[data-domain="Robotics"] { background: rgba(244, 114, 182, 0.15); color: var(--domain-robotics); }
+
+/* ── Phase Indicator ───────────────────────────────────── */
+
+.phase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.phase-badge[data-phase="1"] { background: rgba(34, 211, 238, 0.15); color: var(--phase-1); }
+.phase-badge[data-phase="2"] { background: rgba(251, 191, 36, 0.15); color: var(--phase-2); }
+.phase-badge[data-phase="3"] { background: rgba(248, 113, 113, 0.15); color: var(--phase-3); }
+
+/* ── Velocity Arrow ────────────────────────────────────── */
+
+.velocity-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.velocity-indicator.positive { color: var(--accent-positive); }
+.velocity-indicator.negative { color: var(--accent-negative); }
+.velocity-indicator.neutral { color: var(--accent-neutral); }
+
+/* ── Pulse animation for high-velocity items ───────────── */
+
+@keyframes signal-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-active {
+  animation: signal-pulse 2s ease-in-out infinite;
+}
+
+/* ── Toolbar / Filters ─────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: var(--bg-surface);
+  border-color: var(--signal-academic);
+  color: var(--text-primary);
+}
+
+.sort-label {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Footer ────────────────────────────────────────────── */
+
+.app-footer {
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ── Utility ───────────────────────────────────────────── */
+
+.mono { font-family: var(--font-mono); }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+/* ── Responsive ────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .app-main {
+    padding: var(--space-md);
+  }
+
+  .app-header {
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,121 @@
+/* ── Compare Page ───────────────────────────────────────── */
+
+.compare-selectors {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.compare-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.compare-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.compare-select {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.compare-select:focus {
+  outline: none;
+  border-color: var(--signal-academic);
+}
+
+.compare-select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.compare-remove-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.compare-remove-btn:hover {
+  border-color: var(--accent-negative);
+  color: var(--accent-negative);
+}
+
+/* ── Metrics Table ─────────────────────────────────────── */
+
+.compare-metrics-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.compare-metrics-header,
+.compare-metrics-row {
+  display: grid;
+  grid-template-columns: 120px repeat(3, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  align-items: center;
+}
+
+.compare-metrics-header {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.compare-metrics-row {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.compare-metrics-row:last-child {
+  border-bottom: none;
+}
+
+.compare-metrics-label {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .compare-selectors {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .compare-select {
+    min-width: 100%;
+  }
+
+  .compare-metrics-header,
+  .compare-metrics-row {
+    grid-template-columns: 80px repeat(3, 1fr);
+    font-size: 0.75rem;
+  }
+}

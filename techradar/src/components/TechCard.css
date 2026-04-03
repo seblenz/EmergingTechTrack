@@ -1,0 +1,74 @@
+/* ── Technology Card ────────────────────────────────────── */
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-card:hover {
+  text-decoration: none;
+}
+
+.tech-card-tags {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.tech-card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--space-xs) 0;
+}
+
+.tech-card-sparkline {
+  height: 40px;
+  margin: var(--space-xs) 0;
+}
+
+.tech-card-metrics {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tech-card-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tech-card-metric-label {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Subtle pulse glow on high-velocity cards */
+.tech-card-pulse {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent-positive);
+  opacity: 0;
+  animation: card-pulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes card-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.4; }
+}

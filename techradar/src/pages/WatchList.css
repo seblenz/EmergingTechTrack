@@ -1,0 +1,13 @@
+/* ── Watch List Grid ────────────────────────────────────── */
+
+.watch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .watch-grid {
+    grid-template-columns: 1fr;
+  }
+}
